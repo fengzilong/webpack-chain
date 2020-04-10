@@ -37,7 +37,7 @@ This is easier explained through the examples following.
 
 ## Installation
 
-`webpack-chain` requires Node.js v6.9 and higher. `webpack-chain` also
+`webpack-chain` requires Node.js 10 or higher. `webpack-chain` also
 only creates configuration objects designed for use in webpack versions 2, 3,
 and 4.
 
