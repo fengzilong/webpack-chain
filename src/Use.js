@@ -10,6 +10,12 @@ module.exports = Orderable(
       this.extend(['loader', 'options']);
     }
 
+    clone() {
+      const cloned = super.clone();
+      cloned.name = this.name;
+      return cloned;
+    }
+
     tap(f) {
       this.options(f(this.get('options')));
       return this;

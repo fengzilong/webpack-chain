@@ -12,16 +12,20 @@ const Performance = require('./Performance');
 module.exports = class extends ChainedMap {
   constructor() {
     super();
-    this.devServer = new DevServer(this);
-    this.entryPoints = new ChainedMap(this);
-    this.module = new Module(this);
-    this.node = new ChainedMap(this);
-    this.optimization = new Optimization(this);
-    this.output = new Output(this);
-    this.performance = new Performance(this);
-    this.plugins = new ChainedMap(this);
-    this.resolve = new Resolve(this);
-    this.resolveLoader = new ResolveLoader(this);
+
+    this.assign({
+      devServer: new DevServer(this),
+      entryPoints: new ChainedMap(this),
+      module: new Module(this),
+      node: new ChainedMap(this),
+      optimization: new Optimization(this),
+      output: new Output(this),
+      performance: new Performance(this),
+      plugins: new ChainedMap(this),
+      resolve: new Resolve(this),
+      resolveLoader: new ResolveLoader(this)
+    });
+    
     this.extend([
       'amd',
       'bail',

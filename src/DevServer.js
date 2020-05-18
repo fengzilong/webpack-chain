@@ -5,7 +5,9 @@ module.exports = class extends ChainedMap {
   constructor(parent) {
     super(parent);
 
-    this.allowedHosts = new ChainedSet(this);
+    this.assign({
+      allowedHosts: new ChainedSet(this)
+    });
 
     this.extend([
       'after',

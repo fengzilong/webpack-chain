@@ -4,7 +4,9 @@ const Plugin = require('./Plugin');
 module.exports = class extends ChainedMap {
   constructor(parent) {
     super(parent);
-    this.minimizers = new ChainedMap(this);
+    this.assign({
+      minimizers: new ChainedMap(this)
+    });
     this.extend([
       'concatenateModules',
       'flagIncludedChunks',

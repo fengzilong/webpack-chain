@@ -4,8 +4,10 @@ const Rule = require('./Rule');
 module.exports = class extends ChainedMap {
   constructor(parent) {
     super(parent);
-    this.rules = new ChainedMap(this);
-    this.defaultRules = new ChainedMap(this);
+    this.assign({
+      rules: new ChainedMap(this),
+      defaultRules: new ChainedMap(this),
+    })
     this.extend(['noParse', 'strictExportPresence']);
   }
 

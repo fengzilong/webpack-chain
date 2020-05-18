@@ -4,8 +4,10 @@ const ChainedSet = require('./ChainedSet');
 module.exports = class extends Resolve {
   constructor(parent) {
     super(parent);
-    this.moduleExtensions = new ChainedSet(this);
-    this.packageMains = new ChainedSet(this);
+    this.assign({
+      moduleExtensions: new ChainedSet(this),
+      packageMains: new ChainedSet(this)
+    })
   }
 
   toConfig() {

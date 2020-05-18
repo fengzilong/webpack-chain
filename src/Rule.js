@@ -23,11 +23,13 @@ const Rule = Orderable(
         rule = rule.parent;
       }
 
-      this.uses = new ChainedMap(this);
-      this.include = new ChainedSet(this);
-      this.exclude = new ChainedSet(this);
-      this.rules = new ChainedMap(this);
-      this.oneOfs = new ChainedMap(this);
+      this.assign({
+        uses: new ChainedMap(this),
+        include: new ChainedSet(this),
+        exclude: new ChainedSet(this),
+        rules: new ChainedMap(this),
+        oneOfs: new ChainedMap(this)
+      });
       this.extend([
         'enforce',
         'issuer',
@@ -38,6 +40,15 @@ const Rule = Orderable(
         'test',
         'type',
       ]);
+    }
+    
+    clone() {
+      const cloned = super.clone();
+      cloned.name = this.name;
+      cloned.names = this.names;
+      cloned.ruleType = this.ruleType;
+      cloned.ruleTypes = this.ruleTypes;
+      return cloned;
     }
 
     use(name) {

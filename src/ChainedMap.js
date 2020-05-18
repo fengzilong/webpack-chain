@@ -1,10 +1,42 @@
 const merge = require('deepmerge');
+const cloneDeep = require('clone-deep');
 const Chainable = require('./Chainable');
 
 module.exports = class extends Chainable {
   constructor(parent) {
     super(parent);
     this.store = new Map();
+  }
+  
+  clone() {
+    const Ctor = this.constructor;
+    const cloned = new Ctor(this.parent);
+    this.store.forEach((value, key) => {
+      if(
+        (value instanceof Chainable) &&
+        (typeof value.clone === 'function')
+      ) {
+        cloned.set(key, value.clone());
+      } else {
+        cloned.set(key, cloneDeep(value));
+      }
+    });
+    // override sources with cloned one
+    const sources = this._sources;
+    if(sources) {
+      cloned._sources = sources;
+      Object.keys(sources).forEach((key) => {
+        cloned[key] = sources[key].clone()
+      });
+    }
+    return cloned;
+  }
+  
+  assign(sources) {
+    this._sources = sources;
+    Object.keys(sources).forEach((key) => {
+      this[key] = sources[key]
+    });
   }
 
   extend(methods) {

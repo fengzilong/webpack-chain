@@ -28,6 +28,7 @@
     "version": "yarn changelog --package && git add CHANGELOG.md"
   },
   "dependencies": {
+    "clone-deep": "^4.0.1",
     "deepmerge": "^1.5.2",
     "javascript-stringify": "^2.0.1"
   },

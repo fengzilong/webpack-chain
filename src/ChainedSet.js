@@ -1,9 +1,17 @@
+const cloneDeep = require('clone-deep');
 const Chainable = require('./Chainable');
 
 module.exports = class extends Chainable {
   constructor(parent) {
     super(parent);
     this.store = new Set();
+  }
+  
+  clone() {
+    const Ctor = this.constructor;
+    const cloned = new Ctor(this.parent);
+    cloned.store = cloneDeep(this.store);
+    return cloned;
   }
 
   add(value) {

@@ -16,6 +16,14 @@ module.exports = Orderable(
         return Plugin;
       });
     }
+    
+    // Plugin should override clone
+    clone() {
+      const cloned = super.clone();
+      cloned.name = this.name;
+      cloned.type = this.type;
+      return cloned;
+    }
 
     use(plugin, args = []) {
       return this.set('plugin', plugin).set('args', args);

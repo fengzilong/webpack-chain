@@ -5,14 +5,18 @@ const Plugin = require('./Plugin');
 module.exports = class extends ChainedMap {
   constructor(parent) {
     super(parent);
-    this.alias = new ChainedMap(this);
-    this.aliasFields = new ChainedSet(this);
-    this.descriptionFiles = new ChainedSet(this);
-    this.extensions = new ChainedSet(this);
-    this.mainFields = new ChainedSet(this);
-    this.mainFiles = new ChainedSet(this);
-    this.modules = new ChainedSet(this);
-    this.plugins = new ChainedMap(this);
+
+    this.assign({
+      alias: new ChainedMap(this),
+      aliasFields: new ChainedSet(this),
+      descriptionFiles: new ChainedSet(this),
+      extensions: new ChainedSet(this),
+      mainFields: new ChainedSet(this),
+      mainFiles: new ChainedSet(this),
+      modules: new ChainedSet(this),
+      plugins: new ChainedMap(this)
+    });
+    
     this.extend([
       'cachePredicate',
       'cacheWithContext',
